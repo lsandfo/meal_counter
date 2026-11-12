@@ -27,12 +27,17 @@ pub fn print_save(days: i32, value: f32) {
 
 #[cfg(test)]
 mod testing {
-    use super::*;
+    use std::fs::remove_file;
+
+use super::*;
 
     #[test]
     fn test_get_save() {
+        let test_file: &str = "./test_save";
+        write(test_file, "5;12.50").unwrap();
         assert_eq!(get_save(""), (0, 0.00));
-        assert_eq!(get_save("/home/lsandfo/.meal_counter"), (5, 12.50));
+        assert_eq!(get_save(test_file), (5, 12.50));
+        remove_file(test_file).unwrap();
     }
 
     #[test]

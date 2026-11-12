@@ -9,7 +9,7 @@ fn main() {
     let home = env::var("HOME").expect("HOME var missing!");
     let save_file_buffer = format!("{home}/.meal_counter");
     let save_file = save_file_buffer.as_str();
-    let args = env::args();
+    let args: Vec<String> =  env::args().collect();
     if args.len() == 1 {
         (days, _) = get_save(save_file);
         days += 1;
@@ -17,8 +17,8 @@ fn main() {
         print_save(days, value);
         write_save(days, value, save_file).unwrap();
     } else if args.len() >= 2 {
-        let arg_list: Vec<String> = args.collect();
-        match arg_list[1].as_str() {
+        
+        match args[1].as_str() {
             "-m" => {
                 (days, _) = get_save(save_file);
                 days -= 1;
@@ -27,8 +27,8 @@ fn main() {
                 write_save(days, value, save_file).unwrap();
             }
             "-s" => {
-                if arg_list.len() >= 3 {
-                    days = arg_list[2]
+                if args.len() >= 3 {
+                    days = args[2]
                         .parse::<i32>()
                         .expect("-s braucht Zahl als arugment!");
                     value = days as f32 * PRICE;
