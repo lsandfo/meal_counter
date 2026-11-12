@@ -2,7 +2,7 @@ use std::fs::{read_to_string, write};
 
 /// get_save nimmt den Path zum Savefile als &str und gibt die enthaltenen Tage als i32 und die Kosten als f32 zurück.
 /// Ist kein Savefile vorhanden werden 0 Tage un 0.00 Kosten zurück gegeben
-fn get_save(save_file: &str) -> (i32, f32) {
+pub fn get_save(save_file: &str) -> (i32, f32) {
     let sv_raw = read_to_string(save_file).unwrap_or("0;0.00".to_string());
     let mut sv = sv_raw.split(";");
     let days: i32 = sv.next().unwrap().parse::<i32>().unwrap();
@@ -12,12 +12,16 @@ fn get_save(save_file: &str) -> (i32, f32) {
 
 /// write_save nimmt die Tage(days) als i32, Kosten(value) als f32 und den Path zum Savefile (save_file) als &str.
 /// Es wird ein Result mit Ok(True) bei erfolg wiedergegeben, alternativ der entstandene Error
-fn write_save(days: i32, value: f32, save_file: &str) -> Result<bool, Box<dyn std::error::Error>> {
+pub fn write_save(
+    days: i32,
+    value: f32,
+    save_file: &str,
+) -> Result<bool, Box<dyn std::error::Error>> {
     write(save_file, format!("{days};{value:.2}"))?;
     Ok(true)
 }
 
-fn print_save(days: i32, value: f32) {
+pub fn print_save(days: i32, value: f32) {
     println!("Tage:\t{days:>5}\nKosten:\t{value:>5.2}");
 }
 
