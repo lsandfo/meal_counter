@@ -17,6 +17,10 @@ fn write_save(days: i32, value: f32, save_file: &str) -> Result<bool, Box<dyn st
     Ok(true)
 }
 
+fn print_save(days: i32, value: f32) {
+    println!("Tage:\t{days:>5}\nKosten:\t{value:>5.2}");
+}
+
 #[cfg(test)]
 mod testing {
     use super::*;
@@ -33,5 +37,12 @@ mod testing {
         write_save(5, 12.50, sv).unwrap();
         assert_eq!("5;12.50", read_to_string(sv).unwrap());
         std::fs::remove_file(sv).unwrap();
+    }
+
+    #[test]
+    fn test_print_save() {
+        print_save(5, 12.50);
+        print_save(31, 77.50);
+        print_save(0, 0.00);
     }
 }
