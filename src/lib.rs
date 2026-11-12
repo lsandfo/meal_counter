@@ -1,3 +1,18 @@
+//! # meal_counter
+//! Zählt Tage und berechnet pro Tag die gesammt Kosten
+//! 
+//! ## Usage:
+//! Options:                    <br>
+//! none    Tag Incrementieren  <br>
+//! -h      help                <br>
+//! -m      Minus 1 Tag         <br>
+//! -s x    Auf Tag x setzen    <br>
+//! -i      Tage anzeigen       <br>
+//! 
+//! ## Kosten Info:
+//! Die Kosten (value) sind Hard auf 2.50 Codiert (Siehe Lib.rs => PRICE) und werden mit der gegebenen Tagesanzahl (days) multiplizert.
+
+
 use std::fs::{read_to_string, write};
 
 /// get_save nimmt den Path zum Savefile als &str und gibt die enthaltenen Tage als i32 und die Kosten als f32 zurück.
@@ -21,6 +36,7 @@ pub fn write_save(
     Ok(true)
 }
 
+/// print_save printetd einfach die gegebennen Tage(days, i32) und Kosten(value, f32).
 pub fn print_save(days: i32, value: f32) {
     println!("Tage:\t{days:>5}\nKosten:\t{value:>5.2}");
 }
