@@ -43,8 +43,15 @@ fn main() {
                 (days, value) = get_save(save_file);
                 print_save(days, value);
             }
+            "-r" => {
+                days = 0;
+                value = 0.00;
+                println!("Tage zurückgesetzt");
+                print_save(days, value);
+                write_save(days, value, save_file).unwrap();
+            }
             "-h" | _ => println!(
-                "Options:\nnone\tTag Incrementieren\n-h\thelp\n-m\tMinus 1 Tag\n-s x\tAuf Tag x setzen\n-i\tTage anzeigen"
+                "Options:\nnone\tTag Incrementieren\n-h\thelp\n-m\tMinus 1 Tag\n-s x\tAuf Tag x setzen\n-i\tTage anzeigen\n-r\tTage auf 0 zurück setzen"
             ),
         }
     } else {
