@@ -10,3 +10,4 @@ none    Tag Incrementieren
 -m      Minus 1 Tag
 -s x    Auf Tag x setzen
 -i      Tage anzeigen
+-r      Tage auf 0 zurück setzen
