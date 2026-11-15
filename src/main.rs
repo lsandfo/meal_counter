@@ -26,7 +26,7 @@ fn main() {
         
         match args[1].as_str() {
             "-a" => {
-                (days, value, date) = get_save(save_file);
+                (days, _, date) = get_save(save_file);
                 days += 1;
                 value = days as f32 * PRICE;
                 print_save(days, value, &date);
