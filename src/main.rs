@@ -64,7 +64,7 @@ fn main() {
                 write_save(days, value, save_file).unwrap();
             }
             "-h" | _ => println!(
-                "Options:\nnone\tTag Incrementieren\n-h\thelp\n-m\tMinus 1 Tag\n-s x\tAuf Tag x setzen\n-i\tTage anzeigen\n-r\tTage auf 0 zurück setzen"
+                "Options:\nnone\tTag Incrementieren\n-a\tTag manuell Incrementieren\n-h\thelp\n-m\tMinus 1 Tag\n-s x\tAuf Tag x setzen\n-i\tTage anzeigen\n-r\tTage auf 0 zurück setzen"
             ),
         }
     } else {
