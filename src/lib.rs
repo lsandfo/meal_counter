@@ -21,11 +21,11 @@ use chrono::prelude::*;
 /// und das aktuelle Datum YYYY.mm.dd als String zurück.
 /// Ist kein Savefile vorhanden werden 0 Tage, 0.00 Kosten und 0000.00.00 als Datum zurück gegeben
 pub fn get_save(save_file: &str) -> (i32, f32, String) {
-    let sv_raw = read_to_string(save_file).unwrap_or("0;0.00;0000.00.00".to_string());
+    let sv_raw = read_to_string(save_file).unwrap_or(format!("0;0.00;{}", get_date()));
     let mut sv = sv_raw.split(";");
     let days: i32 = sv.next().unwrap().parse::<i32>().unwrap_or(0);
     let value: f32 = sv.next().unwrap().parse::<f32>().unwrap_or(0.00);
-    let date: String = sv.next().unwrap_or("0000.00.00").to_string();
+    let date: String = sv.next().unwrap_or(&get_date()).to_string();
     return (days, value, date);
 }
 
@@ -37,7 +37,7 @@ pub fn write_save(
     value: f32,
     save_file: &str,
 ) -> Result<bool, Box<dyn std::error::Error>> {
-    let date = Local::now().format("%Y.%m.%d").to_string();
+    let date = get_date();
     write(save_file, format!("{days};{value:.2};{date}"))?;
     Ok(true)
 }
@@ -45,6 +45,12 @@ pub fn write_save(
 /// print_save printetd einfach die gegebennen Tage(days, i32), Kosten(value, f32) und Datum(date, String).
 pub fn print_save(days: i32, value: f32, date: &String) {
     println!("Tage:\t{days:>5}\nKosten:\t{value:>5.2}\nStand:\t{date}");
+}
+
+/// get_date ist Wrapper für Aktuelles Datum im richtigen format,
+/// dass als String returned wird.
+pub fn get_date() -> String{
+    Local::now().format("%Y.%m.%d").to_string()
 }
 
 #[cfg(test)]
@@ -57,14 +63,14 @@ use super::*;
     fn test_get_save() {
         let test_file: &str = "./test_save";
         write(test_file, "5;12.50;2020.08.04").unwrap();
-        assert_eq!(get_save(""), (0, 0.00, "0000.00.00".to_string()));
+        assert_eq!(get_save(""), (0, 0.00, get_date()));
         assert_eq!(get_save(test_file), (5, 12.50, "2020.08.04".to_string()));
         remove_file(test_file).unwrap();
     }
 
     #[test]
     fn test_write_save() {
-        let date = Local::now().format("%Y.%m.%d").to_string();
+        let date = get_date();
         let sv = "./tmp_save";
         write_save(5, 12.50, sv).unwrap();
         assert_eq!(format!("5;12.50;{date}"), read_to_string(sv).unwrap());

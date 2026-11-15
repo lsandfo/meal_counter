@@ -1,4 +1,4 @@
-use meal_counter::{get_save, print_save, write_save};
+use meal_counter::{get_save, print_save, write_save, get_date};
 use std::{env, process::exit};
 
 fn main() {
@@ -33,7 +33,7 @@ fn main() {
                         .parse::<i32>()
                         .expect("-s braucht Zahl als arugment!");
                     value = days as f32 * PRICE;
-                    print_save(days, value, &"Today".to_string());
+                    print_save(days, value, &get_date());
                     write_save(days, value, save_file).unwrap();
                 } else {
                     println!("-s braucht Zahl als Argument!");
@@ -48,7 +48,7 @@ fn main() {
                 days = 0;
                 value = 0.00;
                 println!("Tage zurückgesetzt");
-                print_save(days, value, &"Today".to_string());
+                print_save(days, value, &get_date());
                 write_save(days, value, save_file).unwrap();
             }
             "-h" | _ => println!(
