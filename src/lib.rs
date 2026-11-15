@@ -4,6 +4,7 @@
 //! ## Usage:
 //! Options:                            <br>
 //! none    Tag Incrementieren          <br>
+//! -a      Tag manuell Incrementieren  <br> 
 //! -h      help                        <br>
 //! -m      Minus 1 Tag                 <br>
 //! -s x    Auf Tag x setzen            <br>
@@ -12,6 +13,10 @@
 //! 
 //! ## Kosten Info:
 //! Die Kosten (value) sind Hard auf 2.50 Codiert (Siehe Lib.rs => PRICE) und werden mit der gegebenen Tagesanzahl (days) multiplizert.
+//! 
+//! ## Tag erhöhung
+//! Ohne Argument, wird der Tag bei ausführung einmal täglich um einen Tag erhöht.
+//! Möchte man den Tag Counter dann nochmal verändern, muss dies per Argument geschehen.
 
 
 use std::fs::{read_to_string, write};

@@ -4,7 +4,7 @@ use std::{env, process::exit};
 fn main() {
     const PRICE: f32 = 2.50;
     let mut days: i32;
-    let value: f32;
+    let mut value: f32;
     let date: String;
 
     let home = env::var("HOME").expect("HOME var missing!");
@@ -12,7 +12,12 @@ fn main() {
     let save_file = save_file_buffer.as_str();
     let args: Vec<String> =  env::args().collect();
     if args.len() == 1 {
-        (days, _, date) = get_save(save_file);
+        (days, value, date) = get_save(save_file);
+        if date == get_date(){
+            println!("Tag wurde heute schon verändert!");
+            print_save(days, value, &date);
+            return;
+        }
         days += 1;
         value = days as f32 * PRICE;
         print_save(days, value, &date);
@@ -20,6 +25,13 @@ fn main() {
     } else if args.len() >= 2 {
         
         match args[1].as_str() {
+            "-a" => {
+                (days, value, date) = get_save(save_file);
+                days += 1;
+                value = days as f32 * PRICE;
+                print_save(days, value, &date);
+                write_save(days, value, save_file).unwrap();
+            }
             "-m" => {
                 (days, _, date) = get_save(save_file);
                 days -= 1;
