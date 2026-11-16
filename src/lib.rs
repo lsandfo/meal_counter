@@ -49,7 +49,7 @@ pub fn write_save(
 
 /// print_save printetd einfach die gegebennen Tage(days, i32), Kosten(value, f32) und Datum(date, String).
 pub fn print_save(days: i32, value: f32, date: &String) {
-    println!("Tage:\t{days:>5}\nKosten:\t{value:>5.2}\nStand:\t{date}");
+    println!("Tage:\t{days:>10}\nKosten:\t{value:>10.2}\nStand:\t{date}");
 }
 
 /// get_date ist Wrapper für Aktuelles Datum im richtigen format,
