@@ -6,6 +6,7 @@ fn main() {
     let mut days: i32;
     let mut value: f32;
     let date: String;
+    let today: String = get_date();
 
     let home = env::var("HOME").expect("HOME var missing!");
     let save_file_buffer = format!("{home}/.meal_counter");
@@ -13,14 +14,14 @@ fn main() {
     let args: Vec<String> =  env::args().collect();
     if args.len() == 1 {
         (days, value, date) = get_save(save_file);
-        if date == get_date(){
+        if date == today{
             println!("Tag wurde heute schon verändert!");
             print_save(days, value, &date);
             return;
         }
         days += 1;
         value = days as f32 * PRICE;
-        print_save(days, value, &date);
+        print_save(days, value, &today);
         write_save(days, value, save_file).unwrap();
     } else if args.len() >= 2 {
         
@@ -45,7 +46,7 @@ fn main() {
                         .parse::<i32>()
                         .expect("-s braucht Zahl als arugment!");
                     value = days as f32 * PRICE;
-                    print_save(days, value, &get_date());
+                    print_save(days, value, &today);
                     write_save(days, value, save_file).unwrap();
                 } else {
                     println!("-s braucht Zahl als Argument!");
@@ -60,7 +61,7 @@ fn main() {
                 days = 0;
                 value = 0.00;
                 println!("Tage zurückgesetzt");
-                print_save(days, value, &get_date());
+                print_save(days, value, &today);
                 write_save(days, value, save_file).unwrap();
             }
             "-h" | _ => println!(
