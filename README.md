@@ -4,14 +4,15 @@ die Tage, die unser kurzer bei der Tagesmutter ist, zählt und gesammtkosten fü
 Absolut overkill das so zu schreiben, ist mehr ein learning-rust-by-doing Ding.
 
 ## Usage:
-Options:
-none    Tag Incrementieren
--a      Tag manuell Incrementieren 
--h      help
--m      Minus 1 Tag
--s x    Auf Tag x setzen
--i      Tage anzeigen
--r      Tage auf 0 zurück setzen
+| Option | Usage |
+|- |- |   
+| none |   Tag Incrementieren          |
+| -a   |   Tag manuell Incrementieren  |
+| -h   |   help    |
+| -m   |   Minus 1 Tag |
+| -s x |   Auf Tag x setzen    |
+| -i   |   Tage anzeigen   |
+| -r   |   Tage auf 0 zurück setzen    |
 
 ## Kosten Info:
 Die Kosten (value) sind Hard auf 2.50 Codiert (Siehe Lib.rs => PRICE) und werden mit der gegebenen Tagesanzahl (days) multiplizert.
@@ -19,3 +20,4 @@ Die Kosten (value) sind Hard auf 2.50 Codiert (Siehe Lib.rs => PRICE) und werden
 ## Tag erhöhung
 Ohne Argument, wird der Tag bei ausführung einmal täglich um einen Tag erhöht.
 Möchte man den Tag Counter dann nochmal verändern, muss dies per Argument geschehen.
+Eine negativ anzahl von Tagen wird nicht gespeichert.

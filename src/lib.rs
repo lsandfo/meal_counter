@@ -17,6 +17,7 @@
 //! ## Tag erhöhung
 //! Ohne Argument, wird der Tag bei ausführung einmal täglich um einen Tag erhöht.
 //! Möchte man den Tag Counter dann nochmal verändern, muss dies per Argument geschehen.
+//! Eine negativ anzahl von Tagen wird nicht gespeichert.
 
 
 use std::fs::{read_to_string, write};
@@ -31,7 +32,7 @@ pub fn get_save(save_file: &str) -> (i32, f32, String) {
     let days: i32 = sv.next().unwrap().parse::<i32>().unwrap_or(0);
     let value: f32 = sv.next().unwrap().parse::<f32>().unwrap_or(0.00);
     let date: String = sv.next().unwrap_or(&get_date()).to_string();
-    return (days, value, date);
+    (days, value, date)
 }
 
 /// write_save nimmt die Tage(days) als i32, Kosten(value) als f32, Datum(date) als String 
