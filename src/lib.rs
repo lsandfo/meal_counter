@@ -37,14 +37,22 @@ pub fn get_save(save_file: &str) -> (i32, f32, String) {
 /// write_save nimmt die Tage(days) als i32, Kosten(value) als f32, Datum(date) als String 
 /// und den Path zum Savefile (save_file) als &str.
 /// Es wird ein Result mit Ok(True) bei erfolg wiedergegeben, alternativ der entstandene Error
+/// Ist die Tagesangabe negativ wird Ok(False) wiedergegeben und nicht gespeichert
 pub fn write_save(
     days: i32,
     value: f32,
     save_file: &str,
 ) -> Result<bool, Box<dyn std::error::Error>> {
-    let date = get_date();
-    write(save_file, format!("{days};{value:.2};{date}"))?;
-    Ok(true)
+    if days < 0{
+        println!("Tage können nicht negativ sein!");
+        Ok(false)
+    }
+    else {
+        let date = get_date();
+        write(save_file, format!("{days};{value:.2};{date}"))?;
+        Ok(true)
+    }
+
 }
 
 /// print_save printetd einfach die gegebennen Tage(days, i32), Kosten(value, f32) und Datum(date, String).
