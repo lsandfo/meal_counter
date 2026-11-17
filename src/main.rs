@@ -1,4 +1,4 @@
-use meal_counter::{get_save, print_save, write_save, get_date};
+use meal_counter::{get_date, get_save, print_save, write_save};
 use std::{env, process::exit};
 
 fn main() {
@@ -11,10 +11,10 @@ fn main() {
     let home = env::var("HOME").expect("HOME var missing!");
     let save_file_buffer = format!("{home}/.meal_counter");
     let save_file = save_file_buffer.as_str();
-    let args: Vec<String> =  env::args().collect();
+    let args: Vec<String> = env::args().collect();
     if args.len() == 1 {
         (days, value, date) = get_save(save_file);
-        if date == today{
+        if date == today {
             println!("Tag wurde heute schon verändert!");
             print_save(days, value, &date);
             return;
@@ -24,7 +24,6 @@ fn main() {
         print_save(days, value, &today);
         write_save(days, value, save_file).unwrap();
     } else if args.len() >= 2 {
-        
         match args[1].as_str() {
             "-a" => {
                 (days, _, date) = get_save(save_file);

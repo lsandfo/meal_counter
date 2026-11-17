@@ -1,27 +1,26 @@
 //! # meal_counter
 //! Zählt Tage und berechnet pro Tag die gesammt Kosten
-//! 
+//!
 //! ## Usage:
 //! Options:                            <br>
 //! none    Tag Incrementieren          <br>
-//! -a      Tag manuell Incrementieren  <br> 
+//! -a      Tag manuell Incrementieren  <br>
 //! -h      help                        <br>
 //! -m      Minus 1 Tag                 <br>
 //! -s x    Auf Tag x setzen            <br>
 //! -i      Tage anzeigen               <br>
 //! -r      Tage auf 0 zurück setzen    <br>
-//! 
+//!
 //! ## Kosten Info:
 //! Die Kosten (value) sind Hard auf 2.50 Codiert (Siehe Lib.rs => PRICE) und werden mit der gegebenen Tagesanzahl (days) multiplizert.
-//! 
+//!
 //! ## Tag erhöhung
 //! Ohne Argument, wird der Tag bei ausführung einmal täglich um einen Tag erhöht.
 //! Möchte man den Tag Counter dann nochmal verändern, muss dies per Argument geschehen.
 //! Eine negativ anzahl von Tagen wird nicht gespeichert.
 
-
-use std::fs::{read_to_string, write};
 use chrono::prelude::*;
+use std::fs::{read_to_string, write};
 
 /// get_save nimmt den Path zum Savefile als &str und gibt die enthaltenen Tage als i32, die Kosten als f32
 /// und das aktuelle Datum YYYY.mm.dd als String zurück.
@@ -35,7 +34,7 @@ pub fn get_save(save_file: &str) -> (i32, f32, String) {
     (days, value, date)
 }
 
-/// write_save nimmt die Tage(days) als i32, Kosten(value) als f32, Datum(date) als String 
+/// write_save nimmt die Tage(days) als i32, Kosten(value) als f32, Datum(date) als String
 /// und den Path zum Savefile (save_file) als &str.
 /// Es wird ein Result mit Ok(True) bei erfolg wiedergegeben, alternativ der entstandene Error
 /// Ist die Tagesangabe negativ wird Ok(False) wiedergegeben und nicht gespeichert
@@ -44,16 +43,14 @@ pub fn write_save(
     value: f32,
     save_file: &str,
 ) -> Result<bool, Box<dyn std::error::Error>> {
-    if days < 0{
+    if days < 0 {
         println!("Tage können nicht negativ sein!");
         Ok(false)
-    }
-    else {
+    } else {
         let date = get_date();
         write(save_file, format!("{days};{value:.2};{date}"))?;
         Ok(true)
     }
-
 }
 
 /// print_save printetd einfach die gegebennen Tage(days, i32), Kosten(value, f32) und Datum(date, String).
@@ -63,7 +60,7 @@ pub fn print_save(days: i32, value: f32, date: &String) {
 
 /// get_date ist Wrapper für Aktuelles Datum im richtigen format,
 /// dass als String returned wird.
-pub fn get_date() -> String{
+pub fn get_date() -> String {
     Local::now().format("%Y.%m.%d").to_string()
 }
 
@@ -71,7 +68,7 @@ pub fn get_date() -> String{
 mod testing {
     use std::fs::remove_file;
 
-use super::*;
+    use super::*;
 
     #[test]
     fn test_get_save() {
