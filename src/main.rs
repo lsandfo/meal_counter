@@ -63,8 +63,14 @@ fn main() {
                 print_save(days, value, &today);
                 write_save(days, value, save_file).unwrap();
             }
+            "-v" => {
+                let version = env!("CARGO_PKG_VERSION");
+                let name = env!("CARGO_PKG_NAME");
+                let author = env!("CARGO_PKG_AUTHORS");
+                println!("{name}\nVersion:\t{version}\nBy:\t\t{author}");
+            }
             _ => println!(
-                "Options:\nnone\tTag Incrementieren\n-a\tTag manuell Incrementieren\n-h\thelp\n-m\tMinus 1 Tag\n-s x\tAuf Tag x setzen\n-i\tTage anzeigen\n-r\tTage auf 0 zurück setzen"
+                "Options:\nnone\tTag Incrementieren\n-a\tTag manuell Incrementieren\n-h\thelp\n-m\tMinus 1 Tag\n-s x\tAuf Tag x setzen\n-i\tTage anzeigen\n-r\tTage auf 0 zurück setzen\n-v\tVersion anzeigen"
             ),
         }
     } else {

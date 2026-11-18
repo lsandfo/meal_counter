@@ -10,6 +10,7 @@
 //! -s x    Auf Tag x setzen            <br>
 //! -i      Tage anzeigen               <br>
 //! -r      Tage auf 0 zurück setzen    <br>
+//! -v      Version anzeigen            <br>
 //!
 //! ## Kosten Info:
 //! Die Kosten (value) sind Hard auf 2.50 Codiert (Siehe Lib.rs => PRICE) und werden mit der gegebenen Tagesanzahl (days) multiplizert.
